@@ -1,0 +1,14 @@
+.bathtub {
+    height: 100px;
+    width: 100px;
+    vertical-align: center;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.water {
+    height: 20px;
+    width: 100px;
+    background-color: blue;
+}
