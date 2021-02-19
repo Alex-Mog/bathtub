@@ -12,3 +12,7 @@
     width: 100px;
     background-color: blue;
 }
+
+.water.empty{
+    display: none;
+}

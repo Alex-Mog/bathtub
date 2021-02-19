@@ -3,7 +3,8 @@ import { useState } from 'react';
 import Bathtub from './components/bathtub.jsx';
 
 function App() {
-  const [status, setStatus] = useState(0)
+  // cock status : -1: decrease Water 0: nothing 1: increase water
+  const [cockStatus, setCockStatus] = useState(0)
   
   return (
     <div className="App">
@@ -11,9 +12,9 @@ function App() {
         <p>
           Bathtub Testing
         </p>
-        <Bathtub status={status}/>
-        <button className="btn btn-default" onClick={() => setStatus(1)}>Increase Water</button>
-        <button className="btn btn-default" onClick={() => setStatus(-1)}>Decrease Water</button>
+        <Bathtub cockStatus={cockStatus}/>
+        <button className="btn btn-default" onClick={() => setCockStatus(1)}>Increase Water</button>
+        <button className="btn btn-default" onClick={() => setCockStatus(-1)}>Decrease Water</button>
       </header>
     </div>
   );

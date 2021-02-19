@@ -5,45 +5,65 @@ class Bathtub extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      percent: 0,
-      html: ''
+      water_percent: 0,
+      water_fillable: [0,0,0,0,0]
     };
   }
   
   componentDidMount() {
-    this.timerID = setInterval(
+    this.timer = setInterval(
       () => this.updatePercent(),
       2000
     );
   }
   
   componentWillUnmount() {
-    clearInterval(this.timerID);
+    clearInterval(this.timer);
   }
   
   updatePercent() {
-    if((this.state.percent <= 0 && this.props.status == -1) || (this.state.percent >= 100 && this.props.status == 1)){
+    if((this.state.water_percent <= 0 && this.props.cockStatus == -1) || (this.state.water_percent >= 100 && this.props.cockStatus == 1)){
       return false;
     }else{
       this.setState((state, props) => ({
-        percent: state.percent + 20 * props.status
+        water_percent: state.water_percent + 20 * props.cockStatus
       }));
       this.showWater();
     }
   }
   
   showWater() {
-    this.setState({html: ''});
-    var count = this.state.percent / 20;
-    for(var i=0; i<count; i++)
-      this.setState((state, props) => ({
-        html: state.html + '<div class="water"></div>'
-      }));
+    var count = this.state.water_percent / 20;
+    switch(count){
+      case 0:
+        this.setState({water_fillable: [0,0,0,0,0]})
+        break;
+      case 1:
+        this.setState({water_fillable: [1,0,0,0,0]})
+        break;
+      case 2:
+        this.setState({water_fillable: [1,1,0,0,0]})
+        break;
+      case 3:
+        this.setState({water_fillable: [1,1,1,0,0]})
+        break;
+      case 4:
+        this.setState({water_fillable: [1,1,1,1,0]})
+        break;
+      case 5:
+        this.setState({water_fillable: [1,1,1,1,1]})
+        break;
+    }
   }
   
   render() {
     return (
-      <div className="bathtub" dangerouslySetInnerHTML={{ __html: this.state.html }}>
+      <div className="bathtub">
+        <div className={ this.state.water_fillable[0] == 0 ? 'water empty' : 'water' }></div>
+        <div className={ this.state.water_fillable[1] == 0 ? 'water empty' : 'water' }></div>
+        <div className={ this.state.water_fillable[2] == 0 ? 'water empty' : 'water' }></div>
+        <div className={ this.state.water_fillable[3] == 0 ? 'water empty' : 'water' }></div>
+        <div className={ this.state.water_fillable[4] == 0 ? 'water empty' : 'water' }></div>
       </div>
     );
   }
